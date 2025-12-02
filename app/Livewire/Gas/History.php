@@ -3,6 +3,8 @@
 namespace App\Livewire\Gas;
 
 use App\Models\GasBottle;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,12 +22,21 @@ class History extends Component
         'sort_direction' => ['except' => 'desc'],
     ];
 
-    public function updatingLocationFilter()
+    /**
+     * Obtiene el usuario autenticado
+     */
+    private function user(): User
+    {
+        $user = Auth::user();
+        return $user;
+    }
+
+    public function updatingLocationFilter(): void
     {
         $this->resetPage();
     }
 
-    public function sortBy($field)
+    public function sortBy(string $field): void
     {
         if ($this->sort_by === $field) {
             $this->sort_direction = $this->sort_direction === 'asc' ? 'desc' : 'asc';
@@ -35,9 +46,9 @@ class History extends Component
         }
     }
 
-    public function deleteBottle($bottleId)
+    public function deleteBottle(int $bottleId): void
     {
-        $bottle = GasBottle::where('user_id', auth()->id())
+        $bottle = GasBottle::where('user_id', $this->user()->id)
             ->findOrFail($bottleId);
 
         $bottle->delete();
@@ -47,7 +58,7 @@ class History extends Component
 
     public function render()
     {
-        $query = auth()->user()
+        $query = $this->user()
             ->gasBottles()
             ->with('purchase');
 

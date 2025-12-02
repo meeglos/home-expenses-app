@@ -17,7 +17,9 @@ class Dashboard extends Component
     #[Computed]
     public function activeBottles()
     {
-        return auth()->user()
+        /** @var \App\Models\User $user */
+        $user = \Illuminate\Support\Facades\Auth::user();
+        return $user
             ->gasBottles()
             ->active()
             ->with('purchase')
@@ -31,7 +33,9 @@ class Dashboard extends Component
     #[Computed]
     public function statistics()
     {
-        $userId = auth()->id();
+        /** @var \App\Models\User $user */
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $userId = $user->id;
 
         $stats = [
             'cocina' => $this->getLocationStats('cocina'),
@@ -50,7 +54,11 @@ class Dashboard extends Component
 
     private function getLocationStats(string $location): array
     {
-        $bottles = GasBottle::where('user_id', auth()->id())
+        /** @var \App\Models\User $user */
+        $user = \Illuminate\Support\Facades\Auth::user();
+        $userId = $user->id;
+
+        $bottles = GasBottle::where('user_id', $userId)
             ->where('location', $location)
             ->finished()
             ->whereNotNull('duration_days')
@@ -63,11 +71,10 @@ class Dashboard extends Component
                 'max_duration' => 0,
                 'avg_daily_usage' => 0,
                 'total_bottles' => 0,
-                'current_active' => null,
             ];
         }
 
-        $currentActive = GasBottle::where('user_id', auth()->id())
+        $currentActive = GasBottle::where('user_id', $userId)
             ->where('location', $location)
             ->active()
             ->first();

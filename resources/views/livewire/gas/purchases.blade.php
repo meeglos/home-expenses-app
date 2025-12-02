@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-gray-50">
   <!-- Header -->
-  <div class="sticky top-0 z-10 bg-gradient-to-r from-indigo-600 to-indigo-700 text-white shadow-lg">
+  <div class="sticky top-0 z-10 bg-linear-to-r from-indigo-600 to-indigo-700 text-white shadow-lg">
     <div class="mx-auto flex max-w-7xl items-center px-4 py-4">
       <a
         href="{{ route('gas.dashboard') }}"
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div class="rounded-lg bg-gradient-to-r from-indigo-50 to-purple-50 p-4 shadow">
+    <div class="rounded-lg bg-linear-to-r from-indigo-50 to-purple-50 p-4 shadow">
       <div class="flex items-center justify-between">
         <div>
           <div class="text-sm text-gray-600">Este Año</div>
@@ -59,7 +59,7 @@
     <!-- Evolución de precios -->
     @if ($priceEvolution->count() > 0)
       <div class="overflow-hidden rounded-lg bg-white shadow-md">
-        <div class="border-b bg-gradient-to-r from-gray-100 to-gray-200 px-4 py-3">
+        <div class="border-b bg-linear-to-r from-gray-100 to-gray-200 px-4 py-3">
           <h3 class="text-lg font-bold">📈 Evolución de Precios (últimos 12 meses)</h3>
         </div>
         <div class="p-4">
@@ -78,7 +78,7 @@
                 </div>
                 <div class="h-2 w-full rounded-full bg-gray-200">
                   <div
-                    class="h-2 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500"
+                    class="h-2 rounded-full bg-linear-to-r from-blue-400 to-indigo-500"
                     style="width: {{ $barWidth }}%"
                   ></div>
                 </div>

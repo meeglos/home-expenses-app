@@ -4,6 +4,8 @@ namespace App\Livewire\Gas;
 
 use App\Models\GasBottle;
 use App\Models\GasPurchase;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Validate;
 
@@ -33,7 +35,17 @@ class InstallBottle extends Component
     #[Validate('nullable|string|max:100')]
     public ?string $supplier = null;
 
-    public function mount()
+    /**
+     * Obtiene el usuario autenticado
+     */
+    private function user(): User
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        return $user;
+    }
+
+    public function mount(): void
     {
         $this->installed_at = now()->format('Y-m-d\TH:i');
         $this->purchase_date = now()->format('Y-m-d');
@@ -42,9 +54,9 @@ class InstallBottle extends Component
         $this->checkPreviousBottle();
     }
 
-    private function checkPreviousBottle()
+    private function checkPreviousBottle(): void
     {
-        $previousBottle = GasBottle::where('user_id', auth()->id())
+        $previousBottle = GasBottle::where('user_id', $this->user()->id)
             ->where('location', $this->location)
             ->active()
             ->first();
@@ -58,8 +70,10 @@ class InstallBottle extends Component
     {
         $this->validate();
 
+        $userId = $this->user()->id;
+
         // Finalizar botella anterior si existe
-        $previousBottle = GasBottle::where('user_id', auth()->id())
+        $previousBottle = GasBottle::where('user_id', $userId)
             ->where('location', $this->location)
             ->active()
             ->first();
@@ -70,7 +84,7 @@ class InstallBottle extends Component
 
         // Crear nueva botella
         $bottle = GasBottle::create([
-            'user_id' => auth()->id(),
+            'user_id' => $userId,
             'location' => $this->location,
             'weight_kg' => $this->weight_kg,
             'installed_at' => $this->installed_at,
@@ -80,7 +94,7 @@ class InstallBottle extends Component
         // Crear compra si se indicó
         if ($this->add_purchase && $this->price) {
             GasPurchase::create([
-                'user_id' => auth()->id(),
+                'user_id' => $userId,
                 'gas_bottle_id' => $bottle->id,
                 'price' => $this->price,
                 'purchase_date' => $this->purchase_date ?? now(),

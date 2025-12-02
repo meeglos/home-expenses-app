@@ -8,6 +8,42 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Carbon\Carbon;
 
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property string $location Ubicación de la botella
+ * @property numeric $weight_kg Peso en kg de la botella
+ * @property \Illuminate\Support\Carbon $installed_at Fecha y hora de instalación
+ * @property \Illuminate\Support\Carbon|null $finished_at Fecha y hora cuando se agotó
+ * @property int|null $duration_days Días que duró la botella
+ * @property numeric|null $estimated_daily_usage Uso diario estimado en kg
+ * @property string|null $notes
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read int $days_elapsed
+ * @property-read float|null $estimated_usage_percentage
+ * @property-read string $status
+ * @property-read \App\Models\GasPurchase|null $purchase
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle active()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle byLocation(string $location)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle finished()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereDurationDays($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereEstimatedDailyUsage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereFinishedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereInstalledAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereLocation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereNotes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|GasBottle whereWeightKg($value)
+ * @mixin \Eloquent
+ */
 class GasBottle extends Model
 {
     use HasFactory;
@@ -73,7 +109,7 @@ class GasBottle extends Model
     /**
      * Marcar botella como terminada y calcular duración
      */
-    public function markAsFinished(Carbon $finishedAt = null): void
+    public function markAsFinished(?Carbon $finishedAt = null): void
     {
         $finishedAt = $finishedAt ?? now();
 

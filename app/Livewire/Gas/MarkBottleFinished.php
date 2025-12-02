@@ -5,17 +5,17 @@ namespace App\Livewire\Gas;
 use App\Models\GasBottle;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 class MarkBottleFinished extends Component
 {
     public ?GasBottle $bottle = null;
     public bool $showModal = false;
     public string $finished_at = '';
-
     #[On('mark-finished')]
     public function openModal($bottleId)
     {
-        $this->bottle = GasBottle::where('user_id', auth()->id())
+        $this->bottle = GasBottle::where('user_id', Auth::id())
             ->findOrFail($bottleId);
 
         $this->finished_at = now()->format('Y-m-d\TH:i');

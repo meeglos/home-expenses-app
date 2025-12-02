@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-gray-50">
   <!-- Header -->
-  <div class="sticky top-0 z-10 bg-gradient-to-r from-green-600 to-green-700 text-white shadow-lg">
+  <div class="bg-linear-to-r sticky top-0 z-10 from-green-600 to-green-700 text-white shadow-lg">
     <div class="mx-auto flex max-w-7xl items-center px-4 py-4">
       <a
         href="{{ route('gas.dashboard') }}"

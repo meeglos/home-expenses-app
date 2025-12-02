@@ -3,9 +3,12 @@
 namespace App\Livewire\Gas;
 
 use App\Models\GasPurchase;
+use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Collection;
 
 class Purchases extends Component
 {
@@ -14,9 +17,27 @@ class Purchases extends Component
     public string $year_filter = '';
     public ?string $supplier_filter = null;
 
-    public function mount()
+    public function mount(): void
     {
-        $this->year_filter = now()->year;
+        $this->year_filter = (string) now()->year;
+    }
+
+    /**
+     * Obtiene el usuario autenticado
+     */
+    private function user(): User
+    {
+        /** @var User $user */
+        $user = Auth::user();
+        return $user;
+    }
+
+    /**
+     * Obtiene el ID del usuario autenticado
+     */
+    private function userId(): int
+    {
+        return $this->user()->id;
     }
 
     public function updatingYearFilter()
@@ -29,9 +50,14 @@ class Purchases extends Component
         $this->resetPage();
     }
 
-    public function getPriceEvolution()
+    /**
+     * Obtiene la evolución de precios por mes
+     * 
+     * @return Collection<int, GasPurchase>
+     */
+    public function getPriceEvolution(): Collection
     {
-        return GasPurchase::where('user_id', auth()->id())
+        return GasPurchase::where('user_id', $this->userId())
             ->select(
                 DB::raw('DATE_FORMAT(purchase_date, "%Y-%m") as month'),
                 DB::raw('AVG(price) as avg_price'),
@@ -47,7 +73,7 @@ class Purchases extends Component
 
     public function render()
     {
-        $query = auth()->user()
+        $query = $this->user()
             ->gasPurchases()
             ->with('gasBottle');
 
@@ -61,23 +87,25 @@ class Purchases extends Component
 
         $purchases = $query->recent()->paginate(15);
 
+        $userId = $this->userId();
+
         $stats = [
-            'total' => GasPurchase::where('user_id', auth()->id())->sum('price'),
-            'avg_price' => GasPurchase::where('user_id', auth()->id())->avg('price'),
-            'this_year' => GasPurchase::where('user_id', auth()->id())
+            'total' => GasPurchase::where('user_id', $userId)->sum('price'),
+            'avg_price' => GasPurchase::where('user_id', $userId)->avg('price'),
+            'this_year' => GasPurchase::where('user_id', $userId)
                 ->whereYear('purchase_date', now()->year)
                 ->sum('price'),
-            'last_purchase' => GasPurchase::where('user_id', auth()->id())
+            'last_purchase' => GasPurchase::where('user_id', $userId)
                 ->recent()
                 ->first(),
         ];
 
-        $suppliers = GasPurchase::where('user_id', auth()->id())
+        $suppliers = GasPurchase::where('user_id', $userId)
             ->whereNotNull('supplier')
             ->distinct()
             ->pluck('supplier');
 
-        $years = GasPurchase::where('user_id', auth()->id())
+        $years = GasPurchase::where('user_id', $userId)
             ->selectRaw('YEAR(purchase_date) as year')
             ->distinct()
             ->orderBy('year', 'desc')
