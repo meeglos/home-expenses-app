@@ -1,0 +1,10 @@
+# Ignora TODO…
+*
+
+# …excepto el código fuente JavaScript/TypeScript de tu app
+!resources/js/**
+!resources/ts/**
+
+# Mantén visibles los archivos de configuración por si haces "eslint ."
+!.eslintrc.json
+!.prettierrc.json

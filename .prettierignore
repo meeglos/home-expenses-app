@@ -1,0 +1,6 @@
+*
+!resources/js/**
+!resources/ts/**
+!resources/css/**
+!.eslintrc.json
+!.prettierrc.json

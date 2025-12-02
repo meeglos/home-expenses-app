@@ -1,0 +1,4 @@
+models:
+  Example:
+    name: string
+    description: text

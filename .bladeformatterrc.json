@@ -1,0 +1,29 @@
+{
+  "indentSize": 2,
+  "wrapAttributes": "force-expand-multiline",
+  "sortTailwindcssClasses": true,
+  "wrapLineLength": 100,
+  "endWithNewline": true,
+  "useTabs": false,
+  "sortHtmlAttributes": "none",
+  "noMultipleEmptyLines": true,
+  "noPhpSyntaxCheck": false,
+  "phpVersion": "8.0",
+  "noSingleQuote": false,
+  "noSpaceAfterControlStructureName": false,
+  "customHtmlAttributesOrder": "",
+  "bladeDirectives": [
+    "if", "elseif", "else", "endif",
+    "unless", "endunless",
+    "for", "endfor",
+    "foreach", "endforeach",
+    "forelse", "empty", "endforelse",
+    "while", "endwhile",
+    "section", "endsection",
+    "hasSection", "push", "endpush",
+    "stack", "prepend", "endprepend"
+  ],
+  "indentInnerHtml": true,
+  "extraLiners": "[]",
+  "preserveNewLines": true
+}
