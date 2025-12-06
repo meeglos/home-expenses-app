@@ -660,6 +660,45 @@
             </svg>
           </div>
         </a>
+
+        <!-- Actividad -->
+        <a
+          href="{{ route('gas.history') }}?tab=activity"
+          class="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 transition hover:border-indigo-500 hover:shadow-md"
+        >
+          <div class="flex items-center gap-3">
+            <svg
+              class="text-pocket-teal-600 h-8 w-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <div>
+              <h4 class="font-bold">📋 Actividad</h4>
+              <p class="text-pocket-gray-500 text-sm">Todos los movimientos y llamadas</p>
+            </div>
+          </div>
+          <svg
+            class="text-pocket-teal-600 h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M14 5l7 7m0 0l-7 7m7-7H3"
+            />
+          </svg>
+        </a>
       </div>
     @endif
   </div>

@@ -122,6 +122,44 @@
       </div>
     @endif
 
+    <!-- Historial de llamadas recientes -->
+    @if ($recentCalls->count() > 0)
+      <div class="overflow-hidden rounded-lg bg-white shadow-md">
+        <div class="bg-linear-to-r border-b from-purple-100 to-pink-100 px-4 py-3">
+          <h3 class="text-lg font-bold">📞 Llamadas Recientes</h3>
+        </div>
+        <div class="divide-y divide-gray-200">
+          @foreach ($recentCalls as $call)
+            <div class="flex items-center justify-between p-3">
+              <div class="flex items-center gap-3">
+                <svg
+                  class="h-5 w-5 text-green-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
+                </svg>
+                <div>
+                  <p class="font-medium text-gray-900">{{ $call->supplier->name }}</p>
+                  <p class="text-sm text-gray-500">
+                    {{ $call->called_at->diffForHumans() }}
+                    <span class="text-gray-400">•</span>
+                    {{ $call->called_at->format('d/m/Y H:i') }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          @endforeach
+        </div>
+      </div>
+    @endif
+
     <!-- Formulario para registrar compra -->
     <div class="overflow-hidden rounded-lg bg-white shadow-md">
       <div class="bg-linear-to-r border-b from-indigo-100 to-purple-100 px-4 py-3">
@@ -218,6 +256,7 @@
               @if ($selectedSupplier && $selectedSupplier->phone)
                 <a
                   href="tel:{{ $selectedSupplier->phone }}"
+                  wire:click="registerCall({{ $selectedSupplier->id }})"
                   class="bg-linear-to-r mt-2 flex transform items-center justify-center gap-2 rounded-lg from-green-600 to-green-700 px-4 py-3 font-semibold text-white shadow-md transition hover:from-green-700 hover:to-green-800 active:scale-95"
                 >
                   <svg

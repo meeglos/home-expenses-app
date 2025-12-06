@@ -4,6 +4,7 @@ namespace App\Livewire\Gas;
 
 use App\Models\GasPurchase;
 use App\Models\GasSupplier;
+use App\Models\GasSupplierCall;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -42,6 +43,17 @@ class Purchases extends Component
         $this->bottle_type = 'recarga';
         $this->quantity = 1;
         $this->notes = null;
+    }
+
+    public function registerCall(int $supplierId): void
+    {
+        GasSupplierCall::create([
+            'user_id' => $this->userId(),
+            'supplier_id' => $supplierId,
+            'called_at' => now(),
+        ]);
+
+        session()->flash('call_registered', 'Llamada registrada');
     }
 
     public function savePurchase(): void
@@ -173,6 +185,12 @@ class Purchases extends Component
             ->orderBy('year', 'desc')
             ->pluck('year');
 
+        $recentCalls = GasSupplierCall::where('user_id', $userId)
+            ->with('supplier')
+            ->orderBy('called_at', 'desc')
+            ->limit(5)
+            ->get();
+
         return view('livewire.gas.purchases', [
             'purchases' => $purchases,
             'stats' => $stats,
@@ -180,6 +198,7 @@ class Purchases extends Component
             'usedSuppliers' => $usedSuppliers,
             'years' => $years,
             'priceEvolution' => $this->getPriceEvolution(),
+            'recentCalls' => $recentCalls,
         ]);
     }
 }

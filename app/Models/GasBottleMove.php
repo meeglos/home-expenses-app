@@ -37,4 +37,12 @@ class GasBottleMove extends Model
     {
         return $this->belongsTo(GasBottle::class);
     }
+
+    /**
+     * Alias para la relación gasBottle
+     */
+    public function bottle(): BelongsTo
+    {
+        return $this->gasBottle();
+    }
 }

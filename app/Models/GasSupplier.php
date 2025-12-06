@@ -30,4 +30,9 @@ class GasSupplier extends Model
     {
         return $this->hasMany(GasPurchase::class, 'supplier_id');
     }
+
+    public function calls(): HasMany
+    {
+        return $this->hasMany(GasSupplierCall::class, 'supplier_id');
+    }
 }
