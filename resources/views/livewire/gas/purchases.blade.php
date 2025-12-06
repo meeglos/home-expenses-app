@@ -79,6 +79,163 @@
   </div>
 
   <div class="mx-auto max-w-7xl space-y-4 px-4 py-6">
+    <!-- Formulario para registrar compra -->
+    <div class="overflow-hidden rounded-lg bg-white shadow-md">
+      <div class="bg-linear-to-r border-b from-indigo-100 to-purple-100 px-4 py-3">
+        <h3 class="text-lg font-bold">💰 Registrar Nueva Compra</h3>
+      </div>
+      <form
+        wire:submit="savePurchase"
+        class="space-y-4 p-4"
+      >
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <!-- Precio -->
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">
+              Precio (€) <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              wire:model="price"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+              placeholder="15.50"
+              required
+            >
+            @error('price')
+              <span class="text-sm text-red-600">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <!-- Fecha de compra -->
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Fecha de compra</label>
+            <input
+              type="date"
+              wire:model="purchase_date"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+            >
+            @error('purchase_date')
+              <span class="text-sm text-red-600">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <!-- Proveedor / Tienda -->
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Proveedor / Tienda
+              (opcional)</label>
+            <input
+              type="text"
+              wire:model="supplier"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+              placeholder="Ej: Repsol, Cepsa..."
+            >
+            @error('supplier')
+              <span class="text-sm text-red-600">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <!-- Peso -->
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Peso (kg)</label>
+            <input
+              type="number"
+              step="0.1"
+              wire:model="weight_kg"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+              placeholder="12.5"
+            >
+            @error('weight_kg')
+              <span class="text-sm text-red-600">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <!-- Tipo de botella -->
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Tipo</label>
+            <select
+              wire:model="bottle_type"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+            >
+              <option value="recarga">Recarga</option>
+              <option value="nueva">Nueva</option>
+            </select>
+            @error('bottle_type')
+              <span class="text-sm text-red-600">{{ $message }}</span>
+            @enderror
+          </div>
+
+          <!-- Cantidad -->
+          <div>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Cantidad de botellas</label>
+            <input
+              type="number"
+              min="1"
+              wire:model="quantity"
+              class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+              placeholder="1"
+            >
+            @error('quantity')
+              <span class="text-sm text-red-600">{{ $message }}</span>
+            @enderror
+          </div>
+        </div>
+
+        <!-- Notas -->
+        <div>
+          <label class="mb-1 block text-sm font-medium text-gray-700">Notas (opcional)</label>
+          <textarea
+            wire:model="notes"
+            rows="2"
+            class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+            placeholder="Comentarios adicionales..."
+          ></textarea>
+          @error('notes')
+            <span class="text-sm text-red-600">{{ $message }}</span>
+          @enderror
+        </div>
+
+        <div class="flex justify-end gap-3">
+          <button
+            type="button"
+            wire:click="resetForm"
+            class="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+          >
+            Limpiar
+          </button>
+          <button
+            type="submit"
+            class="bg-linear-to-r rounded-lg from-indigo-600 to-indigo-700 px-4 py-2 text-sm font-medium text-white hover:from-indigo-700 hover:to-indigo-800"
+          >
+            Guardar Compra
+          </button>
+        </div>
+      </form>
+    </div>
+
+    @if (session()->has('success'))
+      <div
+        class="border-pocket-teal-500 bg-pocket-teal-100 text-pocket-teal-700 rounded border-l-4 p-4"
+      >
+        <div class="flex items-center gap-2">
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          {{ session('success') }}
+        </div>
+      </div>
+    @endif
+
     <!-- Estadísticas rápidas -->
     <div class="grid grid-cols-2 gap-3">
       <div class="rounded-lg bg-white p-4 shadow">
@@ -212,7 +369,8 @@
                 @endif
                 {{ ucfirst($purchase->gasBottle->location) }}
                 @if ($purchase->gasBottle->duration_days)
-                  <span class="ml-2">• Duró {{ $purchase->gasBottle->duration_days }} días</span>
+                  <span class="ml-2">• Duró {{ $purchase->gasBottle->duration_days }}
+                    días</span>
                 @endif
               </div>
             @endif

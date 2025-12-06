@@ -81,75 +81,75 @@
           wire:click="$set('activeTab', 'overview')"
           class="{{ $activeTab === 'overview' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
         >
-        <span class="flex items-center justify-center gap-1.5">
-          <svg
-            class="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-            />
-          </svg>
-          Resumen
-        </span>
-      </button>
-      <button
-        wire:click="$set('activeTab', 'active')"
-        class="{{ $activeTab === 'active' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
-      >
-        <span class="flex items-center justify-center gap-1.5">
-          <svg
-            class="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 10V3L4 14h7v7l9-11h-7z"
-            />
-          </svg>
-          Activas
-        </span>
-      </button>
-      <button
-        wire:click="$set('activeTab', 'stats')"
-        class="{{ $activeTab === 'stats' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
-      >
-        <span class="flex items-center justify-center gap-1.5">
-          <svg
-            class="h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-            />
-          </svg>
-          Estadísticas
-        </span>
-      </button>
+          <span class="flex items-center justify-center gap-1.5">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+              />
+            </svg>
+            Resumen
+          </span>
+        </button>
+        <button
+          wire:click="$set('activeTab', 'active')"
+          class="{{ $activeTab === 'active' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
+        >
+          <span class="flex items-center justify-center gap-1.5">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
+            </svg>
+            Activas
+          </span>
+        </button>
+        <button
+          wire:click="$set('activeTab', 'stats')"
+          class="{{ $activeTab === 'stats' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
+        >
+          <span class="flex items-center justify-center gap-1.5">
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+              />
+            </svg>
+            Estadísticas
+          </span>
+        </button>
       </div>
     </div>
   </div>
 
   <div class="mx-auto max-w-7xl space-y-4 px-4 py-6">
     <!-- Botones de acción -->
-    <div class="grid grid-cols-2 gap-3">
+    <div class="flex flex-wrap gap-3 md:flex-nowrap">
       <a
         href="{{ route('gas.install') }}"
-        class="bg-pocket-red-500 hover:bg-pocket-red-600 flex transform items-center justify-center space-x-2 rounded-lg px-4 py-4 text-center font-bold text-white shadow-lg transition active:scale-95"
+        class="bg-pocket-red-500 hover:bg-pocket-red-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg px-4 py-4 text-center font-bold text-white shadow-lg transition active:scale-95"
       >
         <svg
           class="h-5 w-5"
@@ -164,11 +164,11 @@
             d="M12 6v6m0 0v6m0-6h6m-6 0H6"
           />
         </svg>
-        <span>Instalar Botella</span>
+        <span>Instalar</span>
       </a>
       <button
         wire:click="$dispatch('openMoveModal')"
-        class="bg-pocket-red-500 hover:bg-pocket-red-600 flex transform items-center justify-center space-x-2 rounded-lg px-4 py-4 text-center font-bold text-white shadow-lg transition active:scale-95"
+        class="bg-pocket-red-500 hover:bg-pocket-red-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg px-4 py-4 text-center font-bold text-white shadow-lg transition active:scale-95"
       >
         <svg
           class="h-5 w-5"
@@ -183,8 +183,27 @@
             d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
           />
         </svg>
-        <span>Mover Botella</span>
+        <span>Mover</span>
       </button>
+      <a
+        href="{{ route('gas.purchases') }}"
+        class="bg-pocket-red-500 hover:bg-pocket-red-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg px-4 py-4 text-center font-bold text-white shadow-lg transition active:scale-95"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <span>Comprar</span>
+      </a>
     </div>
 
     @if (session()->has('success'))

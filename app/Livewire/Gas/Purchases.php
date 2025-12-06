@@ -17,9 +17,65 @@ class Purchases extends Component
     public string $year_filter = '';
     public ?string $supplier_filter = null;
 
+    // Propiedades del formulario
+    public float $price = 0;
+    public string $purchase_date = '';
+    public ?string $supplier = null;
+    public float $weight_kg = 12.5;
+    public string $bottle_type = 'recarga';
+    public int $quantity = 1;
+    public ?string $notes = null;
+
     public function mount(): void
     {
         $this->year_filter = (string) now()->year;
+        $this->purchase_date = now()->format('Y-m-d');
+    }
+
+    public function resetForm(): void
+    {
+        $this->price = 0;
+        $this->purchase_date = now()->format('Y-m-d');
+        $this->supplier = null;
+        $this->weight_kg = 12.5;
+        $this->bottle_type = 'recarga';
+        $this->quantity = 1;
+        $this->notes = null;
+    }
+
+    public function savePurchase(): void
+    {
+        $validated = $this->validate([
+            'price' => 'required|numeric|min:0',
+            'purchase_date' => 'required|date',
+            'supplier' => 'nullable|string|max:255',
+            'weight_kg' => 'required|numeric|min:0',
+            'bottle_type' => 'required|in:nueva,recarga',
+            'quantity' => 'required|integer|min:1',
+            'notes' => 'nullable|string|max:500',
+        ]);
+
+        // Crear una o más compras según la cantidad
+        for ($i = 0; $i < $this->quantity; $i++) {
+            GasPurchase::create([
+                'user_id' => $this->userId(),
+                'price' => $validated['price'],
+                'purchase_date' => $validated['purchase_date'],
+                'supplier' => $validated['supplier'],
+                'weight_kg' => $validated['weight_kg'],
+                'bottle_type' => $validated['bottle_type'],
+                'notes' => $validated['notes'],
+            ]);
+        }
+
+        $message = $this->quantity > 1
+            ? "Se registraron {$this->quantity} compras correctamente"
+            : 'Compra registrada correctamente';
+
+        session()->flash('success', $message);
+
+        $this->resetForm();
+        $this->resetPage();
     }
 
     /**
