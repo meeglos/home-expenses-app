@@ -1,15 +1,15 @@
 <div class="min-h-screen bg-gray-50">
   <!-- Header -->
   <div class="bg-linear-to-r sticky top-0 z-10 from-indigo-600 to-indigo-700 text-white shadow-lg">
-    <div class="mx-auto max-w-7xl px-4 py-4">
+    <div class="mx-auto max-w-7xl px-4 py-3">
       <div class="flex items-center justify-between">
-        <div class="flex items-center">
+        <div class="flex items-center gap-2">
           <a
             href="{{ route('gas.dashboard') }}"
-            class="mr-3"
+            class=""
           >
             <svg
-              class="h-6 w-6"
+              class="h-5 w-5 md:h-6 md:w-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -22,7 +22,7 @@
               />
             </svg>
           </a>
-          <h1 class="text-2xl font-bold">💶 Compras de Gas</h1>
+          <h1 class="text-base font-bold md:text-xl">💶 Compras de Gas</h1>
         </div>
 
         <!-- User Dropdown -->
@@ -32,11 +32,26 @@
         >
           <x-slot name="trigger">
             <button
-              class="focus:outline-hidden inline-flex items-center rounded-md border border-transparent bg-white/10 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-white/20"
+              class="focus:outline-hidden inline-flex items-center rounded-md border border-transparent bg-white/10 p-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-white/20 md:px-4 md:py-2"
             >
-              <div>{{ Auth::user()->name }}</div>
+              <!-- Icono hamburger solo en móvil -->
+              <svg
+                class="h-5 w-5 md:!hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
 
-              <div class="ms-1">
+              <!-- Nombre y chevron solo en desktop -->
+              <span class="!hidden md:!flex md:items-center md:gap-1">
+                <span>{{ Auth::user()->name }}</span>
                 <svg
                   class="h-4 w-4 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +63,7 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-              </div>
+              </span>
             </button>
           </x-slot>
 
@@ -79,6 +94,56 @@
   </div>
 
   <div class="mx-auto max-w-7xl space-y-4 px-4 py-6">
+    <!-- Botón para llamar al proveedor -->
+    @if (Auth::user()->phone_supplier)
+      <a
+        href="tel:{{ Auth::user()->phone_supplier }}"
+        class="bg-linear-to-r flex transform items-center justify-center gap-2 rounded-lg from-green-600 to-green-700 px-4 py-3 text-center font-semibold text-white shadow-md transition hover:from-green-700 hover:to-green-800 active:scale-95"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+          />
+        </svg>
+        <span class="text-sm md:text-base">Llamar para pedir gas</span>
+        <span
+          class="rounded bg-white/20 px-2 py-1 text-xs">{{ Auth::user()->phone_supplier }}</span>
+      </a>
+    @else
+      <div class="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-6 text-center">
+        <svg
+          class="mx-auto h-12 w-12 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+          />
+        </svg>
+        <p class="mt-2 text-sm text-gray-600">
+          No has configurado un número de teléfono para pedidos
+        </p>
+        <a
+          href="{{ route('profile.edit') }}"
+          class="text-pocket-teal-600 hover:text-pocket-teal-700 mt-2 inline-block text-sm font-medium"
+        >
+          Agregar número en tu perfil →
+        </a>
+      </div>
+    @endif
+
     <!-- Formulario para registrar compra -->
     <div class="overflow-hidden rounded-lg bg-white shadow-md">
       <div class="bg-linear-to-r border-b from-indigo-100 to-purple-100 px-4 py-3">
@@ -240,7 +305,8 @@
     <div class="grid grid-cols-2 gap-3">
       <div class="rounded-lg bg-white p-4 shadow">
         <div class="mb-1 text-xs text-gray-500">Total Gastado</div>
-        <div class="text-pocket-red-500 text-xl font-bold">{{ number_format($stats['total'], 2) }}€
+        <div class="text-pocket-red-500 text-xl font-bold">
+          {{ number_format($stats['total'], 2) }}€
         </div>
       </div>
       <div class="rounded-lg bg-white p-4 shadow">

@@ -3,11 +3,11 @@
   <div
     class="bg-linear-to-r from-pocket-red-500 to-pocket-red-600 sticky top-0 z-10 text-white shadow-lg"
   >
-    <div class="mx-auto max-w-7xl px-4 py-4">
+    <div class="mx-auto max-w-7xl px-4 py-3">
       <div class="flex items-center justify-between">
-        <h1 class="flex items-center gap-2 text-2xl font-bold">
+        <h1 class="flex items-center gap-1.5 text-base font-bold md:gap-2 md:text-xl">
           <svg
-            class="h-6 w-6"
+            class="h-4 w-4 md:h-5 md:w-5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -29,11 +29,26 @@
         >
           <x-slot name="trigger">
             <button
-              class="focus:outline-hidden inline-flex items-center rounded-md border border-transparent bg-white/10 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-white/20"
+              class="focus:outline-hidden inline-flex items-center rounded-md border border-transparent bg-white/10 p-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-white/20 md:px-4 md:py-2"
             >
-              <div>{{ Auth::user()->name }}</div>
+              <!-- Icono hamburger solo en móvil -->
+              <svg
+                class="h-5 w-5 md:!hidden"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
 
-              <div class="ms-1">
+              <!-- Nombre y chevron solo en desktop -->
+              <span class="!hidden md:!flex md:items-center md:gap-1">
+                <span>{{ Auth::user()->name }}</span>
                 <svg
                   class="h-4 w-4 fill-current"
                   xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +60,7 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-              </div>
+              </span>
             </button>
           </x-slot>
 
