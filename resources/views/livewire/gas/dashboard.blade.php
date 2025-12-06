@@ -4,30 +4,83 @@
     class="bg-linear-to-r from-pocket-red-500 to-pocket-red-600 sticky top-0 z-10 text-white shadow-lg"
   >
     <div class="mx-auto max-w-7xl px-4 py-4">
-      <h1 class="flex items-center gap-2 text-2xl font-bold">
-        <svg
-          class="h-6 w-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      <div class="flex items-center justify-between">
+        <h1 class="flex items-center gap-2 text-2xl font-bold">
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+            />
+          </svg>
+          Control de Gas
+        </h1>
+
+        <!-- User Dropdown -->
+        <x-dropdown
+          align="right"
+          width="48"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-          />
-        </svg>
-        Control de Gas
-      </h1>
+          <x-slot name="trigger">
+            <button
+              class="focus:outline-hidden inline-flex items-center rounded-md border border-transparent bg-white/10 px-3 py-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-white/20"
+            >
+              <div>{{ Auth::user()->name }}</div>
+
+              <div class="ms-1">
+                <svg
+                  class="h-4 w-4 fill-current"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </div>
+            </button>
+          </x-slot>
+
+          <x-slot name="content">
+            <x-dropdown-link :href="route('profile.edit')">
+              {{ __('Profile') }}
+            </x-dropdown-link>
+
+            <!-- Authentication -->
+            <form
+              method="POST"
+              action="{{ route('logout') }}"
+            >
+              @csrf
+
+              <x-dropdown-link
+                :href="route('logout')"
+                onclick="event.preventDefault();
+                                                this.closest('form').submit();"
+              >
+                {{ __('Log Out') }}
+              </x-dropdown-link>
+            </form>
+          </x-slot>
+        </x-dropdown>
+      </div>
     </div>
 
     <!-- Tabs -->
-    <div class="no-scrollbar flex overflow-x-auto">
-      <button
-        wire:click="$set('activeTab', 'overview')"
-        class="{{ $activeTab === 'overview' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
-      >
+    <div class="mx-auto max-w-7xl">
+      <div class="no-scrollbar flex overflow-x-auto">
+        <button
+          wire:click="$set('activeTab', 'overview')"
+          class="{{ $activeTab === 'overview' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
+        >
         <span class="flex items-center justify-center gap-1.5">
           <svg
             class="h-4 w-4"
@@ -87,6 +140,7 @@
           Estadísticas
         </span>
       </button>
+      </div>
     </div>
   </div>
 

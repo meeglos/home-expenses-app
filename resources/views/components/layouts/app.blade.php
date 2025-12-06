@@ -31,8 +31,6 @@
   </head>
   <body class="font-sans antialiased">
     <div class="bg-pocket-light-gray-100 min-h-screen">
-      @include('layouts.navigation')
-
       <!-- Page Content -->
       <main>
         {{ $slot }}
