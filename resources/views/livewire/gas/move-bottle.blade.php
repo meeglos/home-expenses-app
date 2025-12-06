@@ -74,7 +74,11 @@
                 <div class="bg-pocket-teal-50 rounded-lg p-4">
                   <div class="flex items-start space-x-3">
                     <div class="text-3xl">
-                      {{ $selectedBottle->location === 'cocina' ? '🍳' : '🚿' }}
+                      @if ($selectedBottle->location === 'cocina')
+                        <x-gameicon-gas-stove class="inline h-4 w-4" />
+                      @else
+                        <x-gmdi-gas-meter-o class="inline h-4 w-4" />
+                      @endif
                     </div>
                     <div class="flex-1">
                       <p class="font-medium text-gray-800">
@@ -104,8 +108,8 @@
                         wire:model="newLocation"
                         value="cocina"
                         class="text-blue-600 focus:ring-blue-500"
-                      />
-                      <span class="text-2xl">🍳</span>
+                      >
+                      <x-gameicon-gas-stove class="h-6 w-6" />
                       <span class="font-medium">Cocina</span>
                     </label>
 
@@ -117,8 +121,8 @@
                         wire:model="newLocation"
                         value="calentador"
                         class="text-blue-600 focus:ring-blue-500"
-                      />
-                      <span class="text-2xl">🚿</span>
+                      >
+                      <x-gmdi-gas-meter-o class="h-6 w-6" />
                       <span class="font-medium">Calentador</span>
                     </label>
                   </div>

@@ -13,7 +13,11 @@
         @if ($bottle)
           <div class="mb-4 rounded bg-gray-50 p-3">
             <div class="mb-2 flex items-center gap-2">
-              <span class="text-2xl">{{ $bottle->location === 'cocina' ? '🍳' : '🚿' }}</span>
+              @if ($bottle->location === 'cocina')
+                <x-gameicon-gas-stove class="h-8 w-8" />
+              @else
+                <x-gmdi-gas-meter-o class="h-8 w-8" />
+              @endif
               <span class="font-bold">{{ ucfirst($bottle->location) }}</span>
             </div>
             <div class="text-sm text-gray-600">

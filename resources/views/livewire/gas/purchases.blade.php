@@ -150,11 +150,13 @@
             @endif
 
             @if ($purchase->gasBottle)
-              @php
-                $icon = $purchase->gasBottle->location === 'cocina' ? '🍳' : '🚿';
-              @endphp
-              <div class="border-t pt-2 text-sm text-gray-600">
-                {{ $icon }} {{ ucfirst($purchase->gasBottle->location) }}
+              <div class="flex items-center gap-1.5 border-t pt-2 text-sm text-gray-600">
+                @if ($purchase->gasBottle->location === 'cocina')
+                  <x-gameicon-gas-stove class="h-4 w-4" />
+                @else
+                  <x-gmdi-gas-meter-o class="h-4 w-4" />
+                @endif
+                {{ ucfirst($purchase->gasBottle->location) }}
                 @if ($purchase->gasBottle->duration_days)
                   <span class="ml-2">• Duró {{ $purchase->gasBottle->duration_days }} días</span>
                 @endif
