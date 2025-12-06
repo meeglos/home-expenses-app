@@ -60,7 +60,7 @@ class History extends Component
     {
         $query = $this->user()
             ->gasBottles()
-            ->with('purchase');
+            ->with(['purchase', 'moves']);
 
         if ($this->location_filter !== 'all') {
             $query->where('location', $this->location_filter);

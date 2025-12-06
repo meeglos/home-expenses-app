@@ -26,6 +26,62 @@ layer(base);
   --font-sans:
     Figtree, ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Pocket Color Palette */
+  --color-pocket-red-50: #fef2f3;
+  --color-pocket-red-100: #fde3e6;
+  --color-pocket-red-200: #fbcbd1;
+  --color-pocket-red-300: #f7a5ae;
+  --color-pocket-red-400: #f17485;
+  --color-pocket-red-500: #EF4056;
+  --color-pocket-red-600: #da2640;
+  --color-pocket-red-700: #b81b33;
+  --color-pocket-red-800: #981930;
+  --color-pocket-red-900: #7f192d;
+
+  --color-pocket-dark-50: #f6f7f7;
+  --color-pocket-dark-100: #e2e4e4;
+  --color-pocket-dark-200: #c5c9cb;
+  --color-pocket-dark-300: #9fa5a8;
+  --color-pocket-dark-400: #7a8285;
+  --color-pocket-dark-500: #62696c;
+  --color-pocket-dark-600: #535a5d;
+  --color-pocket-dark-700: #47494a;
+  --color-pocket-dark-800: #3d3f41;
+  --color-pocket-dark-900: #2D3436;
+
+  --color-pocket-gray-50: #f7f8f8;
+  --color-pocket-gray-100: #eef0f0;
+  --color-pocket-gray-200: #dfe2e3;
+  --color-pocket-gray-300: #c6cbcc;
+  --color-pocket-gray-400: #a6adaf;
+  --color-pocket-gray-500: #7F8C8D;
+  --color-pocket-gray-600: #6b7677;
+  --color-pocket-gray-700: #596162;
+  --color-pocket-gray-800: #4c5253;
+  --color-pocket-gray-900: #424647;
+
+  --color-pocket-light-gray-50: #f9f9f9;
+  --color-pocket-light-gray-100: #ECECEC;
+  --color-pocket-light-gray-200: #e0e0e0;
+  --color-pocket-light-gray-300: #d1d1d1;
+  --color-pocket-light-gray-400: #b5b5b5;
+  --color-pocket-light-gray-500: #999999;
+  --color-pocket-light-gray-600: #7d7d7d;
+  --color-pocket-light-gray-700: #676767;
+  --color-pocket-light-gray-800: #545454;
+  --color-pocket-light-gray-900: #474747;
+
+  --color-pocket-teal-50: #f0fafb;
+  --color-pocket-teal-100: #d9f2f5;
+  --color-pocket-teal-200: #b8e6eb;
+  --color-pocket-teal-300: #87d4dd;
+  --color-pocket-teal-400: #4ebbc9;
+  --color-pocket-teal-500: #20A7B4;
+  --color-pocket-teal-600: #1b8a95;
+  --color-pocket-teal-700: #1b6f79;
+  --color-pocket-teal-800: #1d5b63;
+  --color-pocket-teal-900: #1c4c54;
 }
 
 /*

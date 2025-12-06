@@ -11,6 +11,8 @@ class Dashboard extends Component
 {
     public string $activeTab = 'overview';
 
+    protected $listeners = ['bottleMoved' => '$refresh'];
+
     /**
      * Botellas activas
      */
@@ -22,7 +24,7 @@ class Dashboard extends Component
         return $user
             ->gasBottles()
             ->active()
-            ->with('purchase')
+            ->with(['purchase', 'moves'])
             ->orderBy('installed_at', 'desc')
             ->get();
     }

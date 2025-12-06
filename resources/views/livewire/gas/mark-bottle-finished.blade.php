@@ -39,7 +39,7 @@
                 required
               >
               @error('finished_at')
-                <span class="mt-1 text-sm text-red-500">{{ $message }}</span>
+                <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
               @enderror
             </div>
 

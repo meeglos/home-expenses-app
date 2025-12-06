@@ -30,7 +30,7 @@
     @livewireStyles
   </head>
   <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="bg-pocket-light-gray-100 min-h-screen">
       @include('layouts.navigation')
 
       <!-- Page Content -->

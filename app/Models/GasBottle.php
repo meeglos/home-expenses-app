@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Carbon\Carbon;
 
@@ -83,6 +84,14 @@ class GasBottle extends Model
     }
 
     /**
+     * Relación con los movimientos de la botella
+     */
+    public function moves(): HasMany
+    {
+        return $this->hasMany(GasBottleMove::class);
+    }
+
+    /**
      * Scope para botellas activas (no finalizadas)
      */
     public function scopeActive($query)
@@ -130,7 +139,7 @@ class GasBottle extends Model
     public function getDaysElapsedAttribute(): int
     {
         $endDate = $this->finished_at ?? now();
-        return $this->installed_at->diffInDays($endDate);
+        return (int) $this->installed_at->diffInDays($endDate);
     }
 
     /**
@@ -166,5 +175,34 @@ class GasBottle extends Model
         $percentage = ($daysElapsed / $avgDuration) * 100;
 
         return min($percentage, 100);
+    }
+
+    /**
+     * Mover botella a otra ubicación
+     */
+    public function moveTo(string $newLocation, ?string $reason = null, ?Carbon $movedAt = null): void
+    {
+        if ($this->location === $newLocation) {
+            throw new \InvalidArgumentException('La botella ya está en la ubicación ' . $newLocation);
+        }
+
+        if (!in_array($newLocation, ['cocina', 'calentador'])) {
+            throw new \InvalidArgumentException('Ubicación no válida: ' . $newLocation);
+        }
+
+        $movedAt = $movedAt ?? now();
+        $oldLocation = $this->location;
+
+        // Registrar el movimiento
+        $this->moves()->create([
+            'from_location' => $oldLocation,
+            'to_location' => $newLocation,
+            'moved_at' => $movedAt,
+            'reason' => $reason,
+        ]);
+
+        // Actualizar la ubicación
+        $this->location = $newLocation;
+        $this->save();
     }
 }

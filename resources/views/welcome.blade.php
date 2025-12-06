@@ -10,10 +10,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
   </head>
 
-  <body class="bg-gray-100 font-sans text-gray-800 antialiased dark:bg-gray-900 dark:text-gray-200">
+  <body
+    class="bg-pocket-light-gray-100 text-pocket-dark-800 dark:bg-pocket-dark-900 dark:text-pocket-light-gray-100 font-sans antialiased"
+  >
 
     <!-- Header -->
-    <header class="border-b border-gray-300 dark:border-gray-700">
+    <header class="border-pocket-gray-300 dark:border-pocket-dark-700 border-b">
       <div class="mx-auto flex max-w-5xl items-center justify-between px-8 py-6">
         <h1 class="text-xl font-semibold tracking-tight">
           {{ config('app.name') }}
@@ -23,14 +25,16 @@
         <nav class="flex items-center gap-6 text-sm">
           <a
             href="{{ route('dashboard') }}"
-            class="hover:text-gray-600 dark:hover:text-gray-300"
+            class="hover:text-pocket-gray-500 dark:hover:text-pocket-gray-300"
           >Dashboard</a>
           <div class="group relative">
-            <button class="flex items-center gap-1 hover:text-gray-600 dark:hover:text-gray-300">
+            <button
+              class="hover:text-pocket-gray-500 dark:hover:text-pocket-gray-300 flex items-center gap-1"
+            >
               Miguel Rodríguez
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-3 w-3 text-gray-400"
+                class="text-pocket-gray-400 h-3 w-3"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -62,10 +66,12 @@
           </h3>
           <ul class="space-y-1 text-sm">
             <li><span class="font-medium">PHP:</span> <span
-                class="text-gray-500">{{ phpversion() }}</span></li>
+                class="text-pocket-gray-500">{{ phpversion() }}</span></li>
             <li><span class="font-medium">Laravel:</span> <span
-                class="text-gray-500">{{ Illuminate\Foundation\Application::VERSION }}</span></li>
-            <li><span class="font-medium">Livewire:</span> <span class="text-gray-500">v3.6.4</span>
+                class="text-pocket-gray-500">{{ Illuminate\Foundation\Application::VERSION }}</span>
+            </li>
+            <li><span class="font-medium">Livewire:</span> <span
+                class="text-pocket-gray-500">v3.6.4</span>
             </li>
           </ul>
         </section>
@@ -80,9 +86,9 @@
           </h3>
           <ul class="space-y-1 text-sm">
             <li><span class="font-medium">Tailwind CSS:</span> <span
-                class="text-gray-500">4.1.14</span></li>
+                class="text-pocket-gray-500">4.1.14</span></li>
             <li><span class="font-medium">Alpine.js:</span> <span
-                class="text-gray-500">3.15.0</span></li>
+                class="text-pocket-gray-500">3.15.0</span></li>
           </ul>
         </section>
 
@@ -96,18 +102,19 @@
           </h3>
           <ul class="space-y-1 text-sm">
             <li><span class="font-medium">Node.js:</span> <span
-                class="text-gray-500">v22.20.0</span></li>
-            <li><span class="font-medium">NPM:</span> <span class="text-gray-500">v11.6.1</span>
+                class="text-pocket-gray-500">v22.20.0</span></li>
+            <li><span class="font-medium">NPM:</span> <span
+                class="text-pocket-gray-500">v11.6.1</span>
             </li>
             <li><span class="font-medium">Timezone:</span> <span
-                class="text-gray-500">Europe/Madrid</span></li>
+                class="text-pocket-gray-500">Europe/Madrid</span></li>
           </ul>
         </section>
       </div>
     </main>
 
     <footer
-      class="border-t border-gray-200 py-6 text-center text-xs text-gray-500 dark:border-gray-800"
+      class="border-pocket-gray-200 text-pocket-gray-500 dark:border-pocket-dark-800 border-t py-6 text-center text-xs"
     >
       {{ config('app.name') }} — Proyecto desarrollado con Laravel 12 + TALL Stack.
     </footer>

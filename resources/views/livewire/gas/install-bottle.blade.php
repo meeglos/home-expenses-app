@@ -47,7 +47,7 @@
               class="peer sr-only"
             >
             <div
-              class="rounded-lg border-2 p-4 text-center transition peer-checked:border-blue-600 peer-checked:bg-blue-50"
+              class="peer-checked:border-pocket-red-500 peer-checked:bg-pocket-red-50 rounded-lg border-2 p-4 text-center transition"
             >
               <div class="mb-2 text-3xl">🍳</div>
               <div class="font-medium">Cocina</div>
@@ -61,7 +61,7 @@
               class="peer sr-only"
             >
             <div
-              class="rounded-lg border-2 p-4 text-center transition peer-checked:border-blue-600 peer-checked:bg-blue-50"
+              class="peer-checked:border-pocket-red-500 peer-checked:bg-pocket-red-50 rounded-lg border-2 p-4 text-center transition"
             >
               <div class="mb-2 text-3xl">🚿</div>
               <div class="font-medium">Calentador</div>
@@ -69,7 +69,7 @@
           </label>
         </div>
         @error('location')
-          <span class="mt-1 text-sm text-red-500">{{ $message }}</span>
+          <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
         @enderror
       </div>
 
@@ -84,10 +84,10 @@
           <input
             type="datetime-local"
             wire:model="installed_at"
-            class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+            class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
           >
           @error('installed_at')
-            <span class="mt-1 text-sm text-red-500">{{ $message }}</span>
+            <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
           @enderror
         </div>
 
@@ -99,11 +99,11 @@
             type="number"
             step="0.1"
             wire:model="weight_kg"
-            class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+            class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
             placeholder="12.5"
           >
           @error('weight_kg')
-            <span class="mt-1 text-sm text-red-500">{{ $message }}</span>
+            <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
           @enderror
         </div>
 
@@ -114,11 +114,11 @@
           <textarea
             wire:model="notes"
             rows="3"
-            class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+            class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
             placeholder="Observaciones, estado de la botella, etc."
           ></textarea>
           @error('notes')
-            <span class="mt-1 text-sm text-red-500">{{ $message }}</span>
+            <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
           @enderror
         </div>
       </div>
@@ -146,11 +146,11 @@
               type="number"
               step="0.01"
               wire:model="price"
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+              class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
               placeholder="15.50"
             >
             @error('price')
-              <span class="mt-1 text-sm text-red-500">{{ $message }}</span>
+              <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
             @enderror
           </div>
 
@@ -161,10 +161,10 @@
             <input
               type="date"
               wire:model="purchase_date"
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+              class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
             >
             @error('purchase_date')
-              <span class="mt-1 text-sm text-red-500">{{ $message }}</span>
+              <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
             @enderror
           </div>
 
@@ -175,11 +175,11 @@
             <input
               type="text"
               wire:model="supplier"
-              class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2 focus:ring-blue-500"
+              class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
               placeholder="Ej: Repsol, Cepsa..."
             >
             @error('supplier')
-              <span class="mt-1 text-sm text-red-500">{{ $message }}</span>
+              <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
             @enderror
           </div>
         @else
@@ -200,7 +200,7 @@
         <button
           type="submit"
           wire:loading.attr="disabled"
-          class="flex-1 rounded-lg bg-green-600 px-6 py-4 font-bold text-white transition hover:bg-green-700 disabled:opacity-50"
+          class="bg-pocket-red-500 hover:bg-pocket-red-600 flex-1 rounded-lg px-6 py-4 font-bold text-white transition disabled:opacity-50"
         >
           <span wire:loading.remove>Guardar</span>
           <span wire:loading>Guardando...</span>

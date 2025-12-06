@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-gray-50">
   <!-- Header -->
-  <div class="sticky top-0 z-10 bg-linear-to-r from-indigo-600 to-indigo-700 text-white shadow-lg">
+  <div class="bg-linear-to-r sticky top-0 z-10 from-indigo-600 to-indigo-700 text-white shadow-lg">
     <div class="mx-auto flex max-w-7xl items-center px-4 py-4">
       <a
         href="{{ route('gas.dashboard') }}"
@@ -29,20 +29,22 @@
     <div class="grid grid-cols-2 gap-3">
       <div class="rounded-lg bg-white p-4 shadow">
         <div class="mb-1 text-xs text-gray-500">Total Gastado</div>
-        <div class="text-xl font-bold text-blue-600">{{ number_format($stats['total'], 2) }}€</div>
+        <div class="text-pocket-red-500 text-xl font-bold">{{ number_format($stats['total'], 2) }}€
+        </div>
       </div>
       <div class="rounded-lg bg-white p-4 shadow">
         <div class="mb-1 text-xs text-gray-500">Precio Medio</div>
-        <div class="text-xl font-bold text-green-600">{{ number_format($stats['avg_price'], 2) }}€
+        <div class="text-pocket-teal-600 text-xl font-bold">
+          {{ number_format($stats['avg_price'], 2) }}€
         </div>
       </div>
     </div>
 
-    <div class="rounded-lg bg-linear-to-r from-indigo-50 to-purple-50 p-4 shadow">
+    <div class="bg-linear-to-r rounded-lg from-indigo-50 to-purple-50 p-4 shadow">
       <div class="flex items-center justify-between">
         <div>
           <div class="text-sm text-gray-600">Este Año</div>
-          <div class="text-2xl font-bold text-indigo-600">
+          <div class="text-pocket-teal-600 text-2xl font-bold">
             {{ number_format($stats['this_year'], 2) }}€</div>
         </div>
         @if ($stats['last_purchase'])
@@ -59,7 +61,7 @@
     <!-- Evolución de precios -->
     @if ($priceEvolution->count() > 0)
       <div class="overflow-hidden rounded-lg bg-white shadow-md">
-        <div class="border-b bg-linear-to-r from-gray-100 to-gray-200 px-4 py-3">
+        <div class="bg-linear-to-r border-b from-gray-100 to-gray-200 px-4 py-3">
           <h3 class="text-lg font-bold">📈 Evolución de Precios (últimos 12 meses)</h3>
         </div>
         <div class="p-4">
@@ -74,11 +76,12 @@
                   <span
                     class="font-medium">{{ \Carbon\Carbon::parse($month->month)->format('M Y') }}</span>
                   <span class="text-gray-600">{{ number_format($month->avg_price, 2) }}€
-                    ({{ $month->count }} compras)</span>
+                    ({{ $month->count }} compras)
+                  </span>
                 </div>
                 <div class="h-2 w-full rounded-full bg-gray-200">
                   <div
-                    class="h-2 rounded-full bg-linear-to-r from-blue-400 to-indigo-500"
+                    class="bg-linear-to-r h-2 rounded-full from-blue-400 to-indigo-500"
                     style="width: {{ $barWidth }}%"
                   ></div>
                 </div>
@@ -126,7 +129,7 @@
           <div class="p-4">
             <div class="mb-3 flex items-start justify-between">
               <div class="flex-1">
-                <div class="text-2xl font-bold text-blue-600">
+                <div class="text-pocket-teal-600 text-2xl font-bold">
                   {{ number_format($purchase->price, 2) }}€</div>
                 <p class="text-sm text-gray-500">{{ $purchase->purchase_date->format('d/m/Y') }}
                 </p>
