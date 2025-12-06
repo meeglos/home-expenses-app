@@ -93,4 +93,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(GasPurchase::class);
     }
+
+    /**
+     * Proveedores de gas del usuario
+     */
+    public function gasSuppliers(): HasMany
+    {
+        return $this->hasMany(GasSupplier::class);
+    }
 }

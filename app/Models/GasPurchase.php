@@ -45,9 +45,9 @@ class GasPurchase extends Model
     protected $fillable = [
         'user_id',
         'gas_bottle_id',
+        'supplier_id',
         'price',
         'purchase_date',
-        'supplier',
         'weight_kg',
         'bottle_type',
         'notes',
@@ -73,6 +73,14 @@ class GasPurchase extends Model
     public function gasBottle(): BelongsTo
     {
         return $this->belongsTo(GasBottle::class);
+    }
+
+    /**
+     * Relación con el proveedor
+     */
+    public function supplier(): BelongsTo
+    {
+        return $this->belongsTo(GasSupplier::class, 'supplier_id');
     }
 
     /**

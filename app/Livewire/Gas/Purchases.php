@@ -3,6 +3,7 @@
 namespace App\Livewire\Gas;
 
 use App\Models\GasPurchase;
+use App\Models\GasSupplier;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -20,7 +21,7 @@ class Purchases extends Component
     // Propiedades del formulario
     public float $price = 0;
     public string $purchase_date = '';
-    public ?string $supplier = null;
+    public ?int $supplier_id = null;
     public float $weight_kg = 12.5;
     public string $bottle_type = 'recarga';
     public int $quantity = 1;
@@ -36,7 +37,7 @@ class Purchases extends Component
     {
         $this->price = 0;
         $this->purchase_date = now()->format('Y-m-d');
-        $this->supplier = null;
+        $this->supplier_id = null;
         $this->weight_kg = 12.5;
         $this->bottle_type = 'recarga';
         $this->quantity = 1;
@@ -48,7 +49,7 @@ class Purchases extends Component
         $validated = $this->validate([
             'price' => 'required|numeric|min:0',
             'purchase_date' => 'required|date',
-            'supplier' => 'nullable|string|max:255',
+            'supplier_id' => 'nullable|exists:gas_suppliers,id',
             'weight_kg' => 'required|numeric|min:0',
             'bottle_type' => 'required|in:nueva,recarga',
             'quantity' => 'required|integer|min:1',
@@ -61,7 +62,7 @@ class Purchases extends Component
                 'user_id' => $this->userId(),
                 'price' => $validated['price'],
                 'purchase_date' => $validated['purchase_date'],
-                'supplier' => $validated['supplier'],
+                'supplier_id' => $validated['supplier_id'],
                 'weight_kg' => $validated['weight_kg'],
                 'bottle_type' => $validated['bottle_type'],
                 'notes' => $validated['notes'],
@@ -131,14 +132,14 @@ class Purchases extends Component
     {
         $query = $this->user()
             ->gasPurchases()
-            ->with('gasBottle');
+            ->with(['gasBottle', 'supplier']);
 
         if ($this->year_filter) {
             $query->whereYear('purchase_date', $this->year_filter);
         }
 
         if ($this->supplier_filter) {
-            $query->where('supplier', $this->supplier_filter);
+            $query->where('supplier_id', $this->supplier_filter);
         }
 
         $purchases = $query->recent()->paginate(15);
@@ -156,10 +157,15 @@ class Purchases extends Component
                 ->first(),
         ];
 
-        $suppliers = GasPurchase::where('user_id', $userId)
-            ->whereNotNull('supplier')
-            ->distinct()
-            ->pluck('supplier');
+        $activeSuppliers = GasSupplier::where('user_id', $userId)
+            ->where('is_active', true)
+            ->orderBy('name')
+            ->get();
+
+        $usedSuppliers = GasSupplier::where('user_id', $userId)
+            ->whereHas('purchases')
+            ->orderBy('name')
+            ->get();
 
         $years = GasPurchase::where('user_id', $userId)
             ->selectRaw('YEAR(purchase_date) as year')
@@ -170,7 +176,8 @@ class Purchases extends Component
         return view('livewire.gas.purchases', [
             'purchases' => $purchases,
             'stats' => $stats,
-            'suppliers' => $suppliers,
+            'activeSuppliers' => $activeSuppliers,
+            'usedSuppliers' => $usedSuppliers,
             'years' => $years,
             'priceEvolution' => $this->getPriceEvolution(),
         ]);

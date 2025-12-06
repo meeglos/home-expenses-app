@@ -87,29 +87,6 @@
       @endif
     </div>
 
-    <div>
-      <x-input-label
-        for="phone_supplier"
-        value="Teléfono del Proveedor de Gas"
-      />
-      <x-text-input
-        id="phone_supplier"
-        name="phone_supplier"
-        type="tel"
-        class="mt-1 block w-full"
-        :value="old('phone_supplier', $user->phone_supplier)"
-        placeholder="Ej: 912345678"
-        autocomplete="tel"
-      />
-      <p class="text-pocket-gray-500 mt-1 text-sm">
-        Número para llamar cuando necesites pedir gas
-      </p>
-      <x-input-error
-        class="mt-2"
-        :messages="$errors->get('phone_supplier')"
-      />
-    </div>
-
     <div class="flex items-center gap-4">
       <x-primary-button>{{ __('Save') }}</x-primary-button>
 

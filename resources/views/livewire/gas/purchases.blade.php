@@ -94,30 +94,8 @@
   </div>
 
   <div class="mx-auto max-w-7xl space-y-4 px-4 py-6">
-    <!-- Botón para llamar al proveedor -->
-    @if (Auth::user()->phone_supplier)
-      <a
-        href="tel:{{ Auth::user()->phone_supplier }}"
-        class="bg-linear-to-r flex transform items-center justify-center gap-2 rounded-lg from-green-600 to-green-700 px-4 py-3 text-center font-semibold text-white shadow-md transition hover:from-green-700 hover:to-green-800 active:scale-95"
-      >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-          />
-        </svg>
-        <span class="text-sm md:text-base">Llamar para pedir gas</span>
-        <span
-          class="rounded bg-white/20 px-2 py-1 text-xs">{{ Auth::user()->phone_supplier }}</span>
-      </a>
-    @else
+    @if ($activeSuppliers->count() === 0)
+      <!-- Mensaje cuando no hay proveedores -->
       <div class="rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-6 text-center">
         <svg
           class="mx-auto h-12 w-12 text-gray-400"
@@ -129,17 +107,17 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
           />
         </svg>
         <p class="mt-2 text-sm text-gray-600">
-          No has configurado un número de teléfono para pedidos
+          No has configurado proveedores
         </p>
         <a
-          href="{{ route('profile.edit') }}"
+          href="{{ route('gas.suppliers') }}"
           class="text-pocket-teal-600 hover:text-pocket-teal-700 mt-2 inline-block text-sm font-medium"
         >
-          Agregar número en tu perfil →
+          Configurar proveedores →
         </a>
       </div>
     @endif
@@ -185,19 +163,82 @@
             @enderror
           </div>
 
-          <!-- Proveedor / Tienda -->
-          <div>
-            <label class="mb-1 block text-sm font-medium text-gray-700">Proveedor / Tienda
-              (opcional)</label>
-            <input
-              type="text"
-              wire:model="supplier"
-              class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
-              placeholder="Ej: Repsol, Cepsa..."
-            >
-            @error('supplier')
+          <!-- Proveedor -->
+          <div class="md:col-span-2">
+            <label class="mb-1 block text-sm font-medium text-gray-700">Proveedor (opcional)</label>
+            <div class="flex gap-2">
+              <select
+                wire:model.live="supplier_id"
+                class="flex-1 rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+              >
+                <option value="">-- Sin proveedor --</option>
+                @foreach ($activeSuppliers as $supplier)
+                  <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                @endforeach
+              </select>
+              <a
+                href="{{ route('gas.suppliers') }}"
+                class="flex items-center rounded-lg border border-indigo-600 px-3 text-indigo-600 hover:bg-indigo-50"
+                title="Gestionar proveedores"
+              >
+                <svg
+                  class="h-5 w-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94
+        3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0
+        00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426
+        1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724
+        1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0
+        001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+              </a>
+            </div>
+            @error('supplier_id')
               <span class="text-sm text-red-600">{{ $message }}</span>
             @enderror
+
+            @if ($supplier_id)
+              @php
+                $selectedSupplier = $activeSuppliers->firstWhere('id', $supplier_id);
+              @endphp
+              @if ($selectedSupplier && $selectedSupplier->phone)
+                <a
+                  href="tel:{{ $selectedSupplier->phone }}"
+                  class="bg-linear-to-r mt-2 flex transform items-center justify-center gap-2 rounded-lg from-green-600 to-green-700 px-4 py-3 font-semibold text-white shadow-md transition hover:from-green-700 hover:to-green-800 active:scale-95"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                  <span class="text-sm md:text-base">Llamar a {{ $selectedSupplier->name }}</span>
+                  <span
+                    class="rounded bg-white/20 px-2 py-1 text-xs">{{ $selectedSupplier->phone }}</span>
+                </a>
+              @endif
+            @endif
           </div>
 
           <!-- Peso -->
@@ -232,7 +273,8 @@
 
           <!-- Cantidad -->
           <div>
-            <label class="mb-1 block text-sm font-medium text-gray-700">Cantidad de botellas</label>
+            <label class="mb-1 block text-sm font-medium text-gray-700">Cantidad de
+              botellas</label>
             <input
               type="number"
               min="1"
@@ -248,7 +290,8 @@
 
         <!-- Notas -->
         <div>
-          <label class="mb-1 block text-sm font-medium text-gray-700">Notas (opcional)</label>
+          <label class="mb-1 block text-sm font-medium text-gray-700">Notas
+            (opcional)</label>
           <textarea
             wire:model="notes"
             rows="2"
@@ -391,8 +434,8 @@
             class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-indigo-500"
           >
             <option value="">Todos</option>
-            @foreach ($suppliers as $supplier)
-              <option value="{{ $supplier }}">{{ $supplier }}</option>
+            @foreach ($usedSuppliers as $supplier)
+              <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
             @endforeach
           </select>
         </div>
@@ -421,7 +464,7 @@
             @if ($purchase->supplier)
               <div class="mb-2">
                 <span class="rounded bg-gray-100 px-2 py-1 text-xs font-medium text-gray-800">
-                  🏪 {{ $purchase->supplier }}
+                  🏪 {{ $purchase->supplier->name }}
                 </span>
               </div>
             @endif
@@ -460,4 +503,4 @@
       {{ $purchases->links() }}
     </div>
   </div>
-</div>
+</div>)
