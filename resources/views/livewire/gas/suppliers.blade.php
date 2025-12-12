@@ -29,7 +29,7 @@
               class="focus:outline-hidden inline-flex items-center rounded-md border border-transparent bg-white/10 p-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-white/20 md:px-4 md:py-2"
             >
               <svg
-                class="h-5 w-5 md:!hidden"
+                class="md:hidden! h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -41,7 +41,7 @@
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-              <span class="!hidden md:!flex md:items-center md:gap-1">
+              <span class="hidden! md:flex! md:items-center md:gap-1">
                 <span>{{ Auth::user()->name }}</span>
                 <svg
                   class="h-4 w-4 fill-current"

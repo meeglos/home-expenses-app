@@ -51,7 +51,7 @@
             >
               <!-- Icono hamburger solo en móvil -->
               <svg
-                class="h-5 w-5 md:!hidden"
+                class="h-5 w-5 md:hidden!"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -65,7 +65,7 @@
               </svg>
 
               <!-- Nombre y chevron solo en desktop -->
-              <span class="!hidden md:!flex md:items-center md:gap-1">
+              <span class="hidden! md:flex! md:items-center md:gap-1">
                 <span>{{ Auth::user()->name }}</span>
                 <svg
                   class="h-4 w-4 fill-current"
@@ -503,7 +503,7 @@
               <!-- Icono según tipo -->
               @if ($activity['type'] === 'call')
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-green-600"
+                  class="h-6 w-6 shrink-0 text-green-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -517,7 +517,7 @@
                 </svg>
               @elseif ($activity['type'] === 'purchase')
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-blue-600"
+                  class="h-6 w-6 shrink-0 text-blue-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -531,7 +531,7 @@
                 </svg>
               @elseif ($activity['type'] === 'installation')
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-indigo-600"
+                  class="h-6 w-6 shrink-0 text-indigo-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -545,7 +545,7 @@
                 </svg>
               @else
                 <svg
-                  class="h-6 w-6 flex-shrink-0 text-orange-600"
+                  class="h-6 w-6 shrink-0 text-orange-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

@@ -33,7 +33,7 @@
             >
               <!-- Icono hamburger solo en móvil -->
               <svg
-                class="h-5 w-5 md:!hidden"
+                class="md:hidden! h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -47,7 +47,7 @@
               </svg>
 
               <!-- Nombre y chevron solo en desktop -->
-              <span class="!hidden md:!flex md:items-center md:gap-1">
+              <span class="hidden! md:flex! md:items-center md:gap-1">
                 <span>{{ Auth::user()->name }}</span>
                 <svg
                   class="h-4 w-4 fill-current"
