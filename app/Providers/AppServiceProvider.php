@@ -28,6 +28,11 @@ class AppServiceProvider extends ServiceProvider
         if (env("USE_SPANISH_PLURALIZER", false)) {
             Pluralizer::useLanguage("spanish");
         }
+
+        // Forzar HTTPS en producción
+        if (config('app.env') === 'production') {
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
         //
     }
 }
