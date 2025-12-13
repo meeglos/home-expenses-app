@@ -82,6 +82,17 @@ layer(base);
   --color-pocket-teal-700: #1b6f79;
   --color-pocket-teal-800: #1d5b63;
   --color-pocket-teal-900: #1c4c54;
+
+  --color-pocket-yellow-50: #fffbf5;
+  --color-pocket-yellow-100: #fef4e6;
+  --color-pocket-yellow-200: #fde8c9;
+  --color-pocket-yellow-300: #fcd89d;
+  --color-pocket-yellow-400: #fcc570;
+  --color-pocket-yellow-500: #FCB643;
+  --color-pocket-yellow-600: #e09b2a;
+  --color-pocket-yellow-700: #b8791f;
+  --color-pocket-yellow-800: #905f1b;
+  --color-pocket-yellow-900: #744d18;
 }
 
 /*

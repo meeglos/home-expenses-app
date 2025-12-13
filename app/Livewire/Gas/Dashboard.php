@@ -46,6 +46,7 @@ class Dashboard extends Component
                 ->sum('price'),
             'total_bottles' => GasBottle::where('user_id', $userId)->count(),
             'recent_purchases' => GasPurchase::where('user_id', $userId)
+                ->with('supplier')
                 ->recent()
                 ->limit(5)
                 ->get(),

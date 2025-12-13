@@ -1,7 +1,7 @@
 <div class="min-h-screen bg-gray-50">
   <!-- Header con navegación -->
   <div
-    class="bg-linear-to-r from-pocket-red-500 to-pocket-red-600 sticky top-0 z-10 text-white shadow-lg"
+    class="text-pocket-dark-900 border-pocket-light-gray-200 sticky top-0 z-10 border-b bg-white shadow-lg"
   >
     <div class="mx-auto max-w-7xl px-4 py-3">
       <div class="flex items-center justify-between">
@@ -29,7 +29,7 @@
         >
           <x-slot name="trigger">
             <button
-              class="focus:outline-hidden inline-flex items-center rounded-md border border-transparent bg-white/10 p-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-white/20 md:px-4 md:py-2"
+              class="focus:outline-hidden border-pocket-light-gray-300 text-pocket-dark-900 hover:bg-pocket-light-gray-100 inline-flex items-center rounded-md border bg-white p-2 text-sm font-medium leading-4 transition duration-150 ease-in-out md:px-4 md:py-2"
             >
               <!-- Icono hamburger solo en móvil -->
               <svg
@@ -94,7 +94,7 @@
       <div class="no-scrollbar flex overflow-x-auto">
         <button
           wire:click="$set('activeTab', 'overview')"
-          class="{{ $activeTab === 'overview' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
+          class="{{ $activeTab === 'overview' ? 'bg-pocket-teal-500 text-white' : 'bg-white text-pocket-dark-600 hover:bg-pocket-light-gray-100 border-b-2 border-pocket-teal-500' }} min-w-fit flex-1 rounded-t-lg px-4 py-3 text-sm font-medium transition"
         >
           <span class="flex items-center justify-center gap-1.5">
             <svg
@@ -115,7 +115,7 @@
         </button>
         <button
           wire:click="$set('activeTab', 'active')"
-          class="{{ $activeTab === 'active' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
+          class="{{ $activeTab === 'active' ? 'bg-pocket-yellow-500 text-white' : 'bg-white text-pocket-dark-600 hover:bg-pocket-light-gray-100 border-b-2 border-pocket-yellow-500' }} min-w-fit flex-1 rounded-t-lg px-4 py-3 text-sm font-medium transition"
         >
           <span class="flex items-center justify-center gap-1.5">
             <svg
@@ -136,7 +136,7 @@
         </button>
         <button
           wire:click="$set('activeTab', 'stats')"
-          class="{{ $activeTab === 'stats' ? 'border-white bg-pocket-red-700' : 'border-transparent hover:bg-pocket-red-600' }} min-w-fit flex-1 border-b-2 px-4 py-3 text-sm font-medium transition"
+          class="{{ $activeTab === 'stats' ? 'bg-pocket-red-500 text-white' : 'bg-white text-pocket-dark-600 hover:bg-pocket-light-gray-100 border-b-2 border-pocket-red-500' }} min-w-fit flex-1 rounded-t-lg px-4 py-3 text-sm font-medium transition"
         >
           <span class="flex items-center justify-center gap-1.5">
             <svg
@@ -164,7 +164,7 @@
     <div class="flex flex-wrap gap-3 md:flex-nowrap">
       <a
         href="{{ route('gas.install') }}"
-        class="bg-pocket-red-500 hover:bg-pocket-red-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg px-4 py-4 text-center font-bold text-white shadow-lg transition active:scale-95"
+        class="hover:bg-pocket-teal-50 border-pocket-teal-500 text-pocket-teal-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg border-2 bg-white px-4 py-4 text-center font-bold shadow-md transition active:scale-95"
       >
         <svg
           class="h-5 w-5"
@@ -183,7 +183,7 @@
       </a>
       <button
         wire:click="$dispatch('openMoveModal')"
-        class="bg-pocket-red-500 hover:bg-pocket-red-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg px-4 py-4 text-center font-bold text-white shadow-lg transition active:scale-95"
+        class="hover:bg-pocket-yellow-50 border-pocket-yellow-500 text-pocket-yellow-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg border-2 bg-white px-4 py-4 text-center font-bold shadow-md transition active:scale-95"
       >
         <svg
           class="h-5 w-5"
@@ -202,7 +202,7 @@
       </button>
       <a
         href="{{ route('gas.purchases') }}"
-        class="bg-pocket-red-500 hover:bg-pocket-red-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg px-4 py-4 text-center font-bold text-white shadow-lg transition active:scale-95"
+        class="hover:bg-pocket-red-50 border-pocket-red-500 text-pocket-red-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg border-2 bg-white px-4 py-4 text-center font-bold shadow-md transition active:scale-95"
       >
         <svg
           class="h-5 w-5"
@@ -363,7 +363,7 @@
                     {{ $purchase->purchase_date->format('d/m/Y') }}</div>
                 </div>
                 @if ($purchase->supplier)
-                  <div class="text-pocket-gray-500 text-sm">{{ $purchase->supplier }}</div>
+                  <div class="text-pocket-gray-500 text-sm">{{ $purchase->supplier->name }}</div>
                 @endif
               </div>
             @endforeach
