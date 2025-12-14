@@ -197,6 +197,51 @@
           Datos de la Botella
         </h3>
 
+        @if ($uninstalledPurchases->isNotEmpty())
+          <div class="mb-4 rounded-lg border-2 border-green-200 bg-green-50 p-4">
+            <p class="mb-2 flex items-center gap-2 font-medium text-green-800">
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              Tienes botellas compradas sin instalar
+            </p>
+            <p class="text-sm text-green-700">Selecciona una botella de tu inventario o deja sin
+              seleccionar para
+              instalar una nueva</p>
+          </div>
+
+          <div>
+            <label class="mb-2 block text-sm font-medium text-gray-700">
+              Seleccionar botella comprada (opcional)
+            </label>
+            <select
+              wire:model.live="selected_purchase_id"
+              class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
+            >
+              <option value="">-- Instalar botella nueva --</option>
+              @foreach ($uninstalledPurchases as $purchase)
+                <option value="{{ $purchase->id }}">
+                  {{ $purchase->weight_kg }}kg - €{{ $purchase->price }}
+                  ({{ $purchase->purchase_date->format('d/m/Y') }})
+                  @if ($purchase->supplier)
+                    - {{ $purchase->supplier->name }}
+                  @endif
+                </option>
+              @endforeach
+            </select>
+          </div>
+        @endif
+
         <div>
           <label class="mb-2 block text-sm font-medium text-gray-700">
             Fecha y hora de instalación
@@ -221,10 +266,14 @@
             wire:model="weight_kg"
             class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
             placeholder="12.5"
+            @if ($selected_purchase_id) readonly @endif
           >
           @error('weight_kg')
             <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
           @enderror
+          @if ($selected_purchase_id)
+            <p class="mt-1 text-xs text-gray-500">El peso se toma de la compra seleccionada</p>
+          @endif
         </div>
 
         <div>
@@ -244,85 +293,137 @@
       </div>
 
       <!-- Datos de compra -->
-      <div class="space-y-4 rounded-lg bg-white p-6 shadow-md">
-        <div class="mb-4 flex items-center justify-between">
-          <h3 class="flex items-center gap-2 text-lg font-bold">
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            Datos de Compra
-          </h3>
-          <label class="flex cursor-pointer items-center">
-            <input
-              type="checkbox"
-              wire:model.live="add_purchase"
-              class="mr-2 h-5 w-5"
-            >
-            <span class="text-sm">Registrar compra</span>
-          </label>
+      @if (!$selected_purchase_id)
+        <div class="space-y-4 rounded-lg bg-white p-6 shadow-md">
+          <div class="mb-4 flex items-center justify-between">
+            <h3 class="flex items-center gap-2 text-lg font-bold">
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              Datos de Compra
+            </h3>
+            @if ($uninstalledPurchases->isEmpty())
+              <label class="flex cursor-pointer items-center">
+                <input
+                  type="checkbox"
+                  wire:model.live="add_purchase"
+                  class="mr-2 h-5 w-5"
+                >
+                <span class="text-sm">Registrar compra</span>
+              </label>
+            @endif
+          </div>
+
+          @if ($add_purchase)
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700">
+                  Precio (€) *
+                </label>
+                <input
+                  type="number"
+                  step="0.01"
+                  wire:model="price"
+                  class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
+                  placeholder="15.50"
+                >
+                @error('price')
+                  <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
+                @enderror
+              </div>
+
+              <div>
+                <label class="mb-2 block text-sm font-medium text-gray-700">
+                  Peso (kg) *
+                </label>
+                <input
+                  type="number"
+                  step="0.1"
+                  wire:model="weight_kg"
+                  class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
+                  placeholder="12.5"
+                >
+                @error('weight_kg')
+                  <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
+                @enderror
+              </div>
+            </div>
+
+            <div>
+              <label class="mb-2 block text-sm font-medium text-gray-700">
+                Fecha y hora de compra
+              </label>
+              <input
+                type="datetime-local"
+                wire:model="purchase_date"
+                class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
+              >
+              @error('purchase_date')
+                <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
+              @enderror
+            </div>
+
+            <div>
+              <label class="mb-2 block text-sm font-medium text-gray-700">
+                Proveedor (opcional)
+              </label>
+              <div class="flex gap-2">
+                <select
+                  wire:model="supplier_id"
+                  class="border-pocket-gray-300 focus:ring-pocket-teal-500 flex-1 rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
+                >
+                  <option value="">-- Sin proveedor --</option>
+                  @foreach ($suppliers as $supplier)
+                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                  @endforeach
+                </select>
+                <a
+                  href="{{ route('gas.suppliers') }}"
+                  class="flex items-center rounded-lg border border-green-600 px-3 text-green-600 hover:bg-green-50"
+                  title="Gestionar proveedores"
+                >
+                  <svg
+                    class="h-5 w-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </a>
+              </div>
+              @error('supplier_id')
+                <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
+              @enderror
+            </div>
+          @else
+            <p class="py-4 text-center text-sm text-gray-500">
+              Puedes registrar la compra más tarde desde el historial
+            </p>
+          @endif
         </div>
-
-        @if ($add_purchase)
-          <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">
-              Precio (€) *
-            </label>
-            <input
-              type="number"
-              step="0.01"
-              wire:model="price"
-              class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
-              placeholder="15.50"
-            >
-            @error('price')
-              <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
-            @enderror
-          </div>
-
-          <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">
-              Fecha de compra
-            </label>
-            <input
-              type="date"
-              wire:model="purchase_date"
-              class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
-            >
-            @error('purchase_date')
-              <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
-            @enderror
-          </div>
-
-          <div>
-            <label class="mb-2 block text-sm font-medium text-gray-700">
-              Proveedor / Tienda (opcional)
-            </label>
-            <input
-              type="text"
-              wire:model="supplier"
-              class="border-pocket-gray-300 focus:ring-pocket-teal-500 w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2"
-              placeholder="Ej: Repsol, Cepsa..."
-            >
-            @error('supplier')
-              <span class="text-pocket-red-500 mt-1 text-sm">{{ $message }}</span>
-            @enderror
-          </div>
-        @else
-          <p class="py-4 text-center text-sm text-gray-500">
-            Puedes registrar la compra más tarde desde el historial
-          </p>
-        @endif
-      </div>
+      @endif
 
       <!-- Botones -->
       <div class="flex gap-3">

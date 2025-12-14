@@ -456,7 +456,7 @@
                   <div class="space-y-1">
                     @foreach ($bottle->moves()->latest()->take(3)->get() as $move)
                       <div class="text-pocket-gray-500 flex items-center justify-between text-xs">
-                        <span>
+                        <span class="flex items-center gap-1">
                           {{ ucfirst($move->from_location) }}
                           <svg
                             class="h-3 w-3"

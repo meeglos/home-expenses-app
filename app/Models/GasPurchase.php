@@ -54,7 +54,7 @@ class GasPurchase extends Model
     ];
 
     protected $casts = [
-        'purchase_date' => 'date',
+        'purchase_date' => 'datetime',
         'price' => 'decimal:2',
         'weight_kg' => 'decimal:2',
     ];

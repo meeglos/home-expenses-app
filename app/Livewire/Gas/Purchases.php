@@ -31,13 +31,13 @@ class Purchases extends Component
     public function mount(): void
     {
         $this->year_filter = (string) now()->year;
-        $this->purchase_date = now()->format('Y-m-d');
+        $this->purchase_date = now()->format('Y-m-d\TH:i');
     }
 
     public function resetForm(): void
     {
         $this->price = 0;
-        $this->purchase_date = now()->format('Y-m-d');
+        $this->purchase_date = now()->format('Y-m-d\TH:i');
         $this->supplier_id = null;
         $this->weight_kg = 12.5;
         $this->bottle_type = 'recarga';
