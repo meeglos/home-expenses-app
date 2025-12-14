@@ -603,7 +603,7 @@
                 </svg>
                 Análisis de Precios
               </h4>
-              <p class="text-pocket-gray-500 text-sm">Evolución y comparativas</p>vas</p>
+              <p class="text-pocket-gray-500 text-sm">Evolución y comparativas</p>
             </div>
             <svg
               class="text-pocket-teal-600 h-5 w-5"

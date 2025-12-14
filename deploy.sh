@@ -29,6 +29,10 @@ ssh root@178.62.255.203 << 'ENDSSH'
     php artisan route:cache
     php artisan view:cache
     
+    echo "🔐 Corrigiendo permisos..."
+    chown -R www-data:www-data storage bootstrap/cache
+    chmod -R 775 storage bootstrap/cache
+    
     echo "✅ Deployment completado!"
 ENDSSH
 
