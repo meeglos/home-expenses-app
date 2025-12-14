@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', App\Livewire\Gas\Dashboard::class)->name('dashboard');
         Route::get('/install', App\Livewire\Gas\InstallBottle::class)->name('install');
         Route::get('/history', App\Livewire\Gas\History::class)->name('history');
+        Route::get('/activity', App\Livewire\Gas\Activity::class)->name('activity');
         Route::get('/purchases', App\Livewire\Gas\Purchases::class)->name('purchases');
         Route::get('/suppliers', App\Livewire\Gas\Suppliers::class)->name('suppliers');
     });

@@ -11,6 +11,10 @@ class Dashboard extends Component
 {
     public string $activeTab = 'overview';
 
+    protected $queryString = [
+        'activeTab' => ['except' => 'overview', 'as' => 'tab'],
+    ];
+
     protected $listeners = ['bottleMoved' => '$refresh'];
 
     /**

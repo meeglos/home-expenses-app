@@ -1,29 +1,14 @@
 <div class="min-h-screen bg-gray-50">
   <!-- Header -->
-  <div class="bg-linear-to-r sticky top-0 z-10 from-indigo-600 to-indigo-700 text-white shadow-lg">
+  <div
+    class="text-pocket-dark-900 border-pocket-light-gray-200 sticky top-0 z-10 border-b bg-white shadow-lg"
+  >
     <div class="mx-auto max-w-7xl px-4 py-3">
       <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <a
-            href="{{ route('gas.dashboard') }}"
-            class=""
-          >
-            <svg
-              class="h-5 w-5 md:h-6 md:w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </a>
-          <h1 class="text-base font-bold md:text-xl">💶 Compras de Gas</h1>
-        </div>
+        <h1 class="flex items-center gap-1.5 text-base font-bold md:gap-2 md:text-xl">
+          <x-icons.lightbulb class="h-4 w-4 md:h-5 md:w-5" />
+          Control de Gas
+        </h1>
 
         <!-- User Dropdown -->
         <x-dropdown
@@ -32,37 +17,13 @@
         >
           <x-slot name="trigger">
             <button
-              class="focus:outline-hidden inline-flex items-center rounded-md border border-transparent bg-white/10 p-2 text-sm font-medium leading-4 text-white transition duration-150 ease-in-out hover:bg-white/20 md:px-4 md:py-2"
+              class="focus:outline-hidden border-pocket-light-gray-300 text-pocket-dark-900 hover:bg-pocket-light-gray-100 inline-flex items-center rounded-md border bg-white p-2 text-sm font-medium leading-4 transition duration-150 ease-in-out md:px-4 md:py-2"
             >
-              <!-- Icono hamburger solo en móvil -->
-              <svg
-                class="md:hidden! h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              <x-icons.menu class="md:hidden! h-5 w-5" />
 
-              <!-- Nombre y chevron solo en desktop -->
               <span class="hidden! md:flex! md:items-center md:gap-1">
                 <span>{{ Auth::user()->name }}</span>
-                <svg
-                  class="h-4 w-4 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                <x-icons.chevron-down />
               </span>
             </button>
           </x-slot>
@@ -72,7 +33,6 @@
               {{ __('Profile') }}
             </x-dropdown-link>
 
-            <!-- Authentication -->
             <form
               method="POST"
               action="{{ route('logout') }}"
@@ -89,6 +49,39 @@
             </form>
           </x-slot>
         </x-dropdown>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="mx-auto max-w-7xl">
+      <div class="no-scrollbar flex overflow-x-auto">
+        <a
+          href="{{ route('gas.dashboard') }}"
+          class="text-pocket-dark-600 hover:bg-pocket-light-gray-100 border-pocket-teal-500 min-w-fit flex-1 rounded-t-lg border-b-2 bg-white px-4 py-3 text-sm font-medium transition"
+        >
+          <span class="flex items-center justify-center gap-1.5">
+            <x-icons.chart-bar class="h-4 w-4" />
+            Resumen
+          </span>
+        </a>
+        <a
+          href="{{ route('gas.dashboard') }}?tab=active"
+          class="text-pocket-dark-600 hover:bg-pocket-light-gray-100 border-pocket-yellow-500 min-w-fit flex-1 rounded-t-lg border-b-2 bg-white px-4 py-3 text-sm font-medium transition"
+        >
+          <span class="flex items-center justify-center gap-1.5">
+            <x-icons.lightning class="h-4 w-4" />
+            Activas
+          </span>
+        </a>
+        <a
+          href="{{ route('gas.dashboard') }}?tab=stats"
+          class="bg-pocket-red-500 min-w-fit flex-1 rounded-t-lg px-4 py-3 text-sm font-medium text-white transition"
+        >
+          <span class="flex items-center justify-center gap-1.5">
+            <x-icons.presentation-chart class="h-4 w-4" />
+            Estadísticas
+          </span>
+        </a>
       </div>
     </div>
   </div>

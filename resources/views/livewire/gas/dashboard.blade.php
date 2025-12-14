@@ -6,19 +6,7 @@
     <div class="mx-auto max-w-7xl px-4 py-3">
       <div class="flex items-center justify-between">
         <h1 class="flex items-center gap-1.5 text-base font-bold md:gap-2 md:text-xl">
-          <svg
-            class="h-4 w-4 md:h-5 md:w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-            />
-          </svg>
+          <x-icons.lightbulb class="h-4 w-4 md:h-5 md:w-5" />
           Control de Gas
         </h1>
 
@@ -32,34 +20,12 @@
               class="focus:outline-hidden border-pocket-light-gray-300 text-pocket-dark-900 hover:bg-pocket-light-gray-100 inline-flex items-center rounded-md border bg-white p-2 text-sm font-medium leading-4 transition duration-150 ease-in-out md:px-4 md:py-2"
             >
               <!-- Icono hamburger solo en móvil -->
-              <svg
-                class="md:hidden! h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              <x-icons.menu class="md:hidden! h-5 w-5" />
 
               <!-- Nombre y chevron solo en desktop -->
               <span class="hidden! md:flex! md:items-center md:gap-1">
                 <span>{{ Auth::user()->name }}</span>
-                <svg
-                  class="h-4 w-4 fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
+                <x-icons.chevron-down />
               </span>
             </button>
           </x-slot>
@@ -97,19 +63,7 @@
           class="{{ $activeTab === 'overview' ? 'bg-pocket-teal-500 text-white' : 'bg-white text-pocket-dark-600 hover:bg-pocket-light-gray-100 border-b-2 border-pocket-teal-500' }} min-w-fit flex-1 rounded-t-lg px-4 py-3 text-sm font-medium transition"
         >
           <span class="flex items-center justify-center gap-1.5">
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
+            <x-icons.chart-bar class="h-4 w-4" />
             Resumen
           </span>
         </button>
@@ -118,19 +72,7 @@
           class="{{ $activeTab === 'active' ? 'bg-pocket-yellow-500 text-white' : 'bg-white text-pocket-dark-600 hover:bg-pocket-light-gray-100 border-b-2 border-pocket-yellow-500' }} min-w-fit flex-1 rounded-t-lg px-4 py-3 text-sm font-medium transition"
         >
           <span class="flex items-center justify-center gap-1.5">
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
-            </svg>
+            <x-icons.lightning class="h-4 w-4" />
             Activas
           </span>
         </button>
@@ -139,19 +81,7 @@
           class="{{ $activeTab === 'stats' ? 'bg-pocket-red-500 text-white' : 'bg-white text-pocket-dark-600 hover:bg-pocket-light-gray-100 border-b-2 border-pocket-red-500' }} min-w-fit flex-1 rounded-t-lg px-4 py-3 text-sm font-medium transition"
         >
           <span class="flex items-center justify-center gap-1.5">
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
-              />
-            </svg>
+            <x-icons.presentation-chart class="h-4 w-4" />
             Estadísticas
           </span>
         </button>
@@ -166,57 +96,21 @@
         href="{{ route('gas.install') }}"
         class="hover:bg-pocket-teal-50 border-pocket-teal-500 text-pocket-teal-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg border-2 bg-white px-4 py-4 text-center font-bold shadow-md transition active:scale-95"
       >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-          />
-        </svg>
+        <x-icons.plus />
         <span>Instalar</span>
       </a>
       <button
         wire:click="$dispatch('openMoveModal')"
         class="hover:bg-pocket-yellow-50 border-pocket-yellow-500 text-pocket-yellow-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg border-2 bg-white px-4 py-4 text-center font-bold shadow-md transition active:scale-95"
       >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-          />
-        </svg>
+        <x-icons.arrows-exchange />
         <span>Mover</span>
       </button>
       <a
         href="{{ route('gas.purchases') }}"
         class="hover:bg-pocket-red-50 border-pocket-red-500 text-pocket-red-600 flex min-w-[100px] flex-1 transform items-center justify-center gap-2 rounded-lg border-2 bg-white px-4 py-4 text-center font-bold shadow-md transition active:scale-95"
       >
-        <svg
-          class="h-5 w-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
+        <x-icons.currency-dollar />
         <span>Comprar</span>
       </a>
     </div>
@@ -250,12 +144,14 @@
         @foreach (['cocina' => '🍳', 'calentador' => '🚿'] as $location => $icon)
           @php $stats = $this->statistics[$location]; @endphp
           <div class="overflow-hidden rounded-lg bg-white shadow-md">
-            <div class="bg-linear-to-r border-b from-gray-100 to-gray-200 px-4 py-3">
-              <h3 class="flex items-center gap-2 text-lg font-bold">
+            <div
+              class="{{ $location === 'cocina' ? 'bg-pocket-yellow-500' : 'bg-pocket-red-500' }} border-b px-4 py-3"
+            >
+              <h3 class="flex items-center gap-2 text-lg font-bold text-white">
                 @if ($location === 'cocina')
-                  <x-gameicon-gas-stove class="h-5 w-5" />
+                  <x-icons.fire />
                 @else
-                  <x-gmdi-gas-meter-o class="h-5 w-5" />
+                  <x-icons.calendar-plus />
                 @endif
                 {{ ucfirst($location) }}
               </h3>
@@ -283,19 +179,7 @@
                   <div class="mt-4 border-t pt-3">
                     <div class="mb-2 flex justify-between text-sm">
                       <span class="text-pocket-teal-600 flex items-center gap-1 font-medium">
-                        <svg
-                          class="h-4 w-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
+                        <x-icons.check />
                         Activa
                       </span>
                       <span class="text-pocket-gray-500">{{ $bottle->days_elapsed }} días</span>
@@ -330,28 +214,14 @@
       <!-- Últimas compras -->
       @if ($this->statistics['recent_purchases']->count() > 0)
         <div class="overflow-hidden rounded-lg bg-white shadow-md">
-          <div
-            class="bg-linear-to-r flex items-center justify-between border-b from-gray-100 to-gray-200 px-4 py-3"
-          >
-            <h3 class="flex items-center gap-2 text-lg font-bold">
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+          <div class="bg-pocket-teal-500 flex items-center justify-between border-b px-4 py-3">
+            <h3 class="flex items-center gap-2 text-lg font-bold text-white">
+              <x-icons.currency-euro />
               Últimas Compras
             </h3>
             <a
               href="{{ route('gas.purchases') }}"
-              class="text-pocket-teal-600 text-sm hover:underline"
+              class="text-sm text-white hover:underline"
             >Ver todo</a>
           </div>
           <div class="divide-y">
@@ -385,9 +255,9 @@
                 <div>
                   <h3 class="flex items-center gap-2 text-lg font-bold">
                     @if ($bottle->location === 'cocina')
-                      <x-gameicon-gas-stove class="h-5 w-5" />
+                      <x-icons.fire />
                     @else
-                      <x-gmdi-gas-meter-o class="h-5 w-5" />
+                      <x-icons.calendar-plus />
                     @endif
                     {{ ucfirst($bottle->location) }}
                   </h3>
@@ -430,27 +300,8 @@
               @if ($bottle->moves()->count() > 0)
                 <div class="mt-3 border-t pt-3">
                   <div
-                    class="text-pocket-gray-500 mb-1 flex items-center gap-1 text-xs font-medium"
-                  >
-                    <svg
-                      class="h-3 w-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
+                    class="text-pocket-gray-500 mb-1 flex items-center gap-1 text-xs font-medium">
+                    <x-icons.map-pin />
                     Historial de movimientos:
                   </div>
                   <div class="space-y-1">
@@ -458,19 +309,7 @@
                       <div class="text-pocket-gray-500 flex items-center justify-between text-xs">
                         <span class="flex items-center gap-1">
                           {{ ucfirst($move->from_location) }}
-                          <svg
-                            class="h-3 w-3"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M14 5l7 7m0 0l-7 7m7-7H3"
-                            />
-                          </svg>
+                          <x-icons.arrow-right class="h-3 w-3" />
                           {{ ucfirst($move->to_location) }}
                         </span>
                         <span
@@ -505,19 +344,7 @@
           >
           <span class="flex items-center gap-1">
             Ver historial completo
-            <svg
-              class="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
+            <x-icons.arrow-right class="h-4 w-4" />
           </span>
         </a>
       </div>
@@ -529,19 +356,7 @@
         <!-- Comparación entre ubicaciones -->
         <div class="rounded-lg bg-white p-4 shadow-md">
           <h3 class="mb-4 flex items-center gap-2 text-lg font-bold">
-            <svg
-              class="h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-              />
-            </svg>
+            <x-icons.chart-bar />
             Comparación de Consumo
           </h3>
           <div class="space-y-4">
@@ -552,9 +367,9 @@
                   <div class="mb-2 flex items-center justify-between">
                     <span class="flex items-center gap-1.5 font-medium">
                       @if ($location === 'cocina')
-                        <x-gameicon-gas-stove class="h-4 w-4" />
+                        <x-icons.fire class="h-4 w-4" />
                       @else
-                        <x-gmdi-gas-meter-o class="h-4 w-4" />
+                        <x-icons.calendar-plus class="h-4 w-4" />
                       @endif
                       {{ ucfirst($location) }}
                     </span>
@@ -588,36 +403,12 @@
           <div class="flex items-center justify-between">
             <div>
               <h4 class="flex items-center gap-2 font-bold">
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                <x-icons.currency-dollar />
                 Análisis de Precios
               </h4>
               <p class="text-pocket-gray-500 text-sm">Evolución y comparativas</p>
             </div>
-            <svg
-              class="text-pocket-teal-600 h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
+            <x-icons.arrow-right class="text-pocket-teal-600 h-5 w-5" />
           </div>
         </a>
 
@@ -628,76 +419,29 @@
           <div class="flex items-center justify-between">
             <div>
               <h4 class="flex items-center gap-2 font-bold">
-                <svg
-                  class="h-5 w-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                  />
-                </svg>
+                <x-icons.document />
                 Historial Completo
               </h4>
               <p class="text-pocket-gray-500 text-sm">Todas las botellas registradas</p>
             </div>
-            <svg
-              class="text-pocket-teal-600 h-5 w-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 5l7 7m0 0l-7 7m7-7H3"
-              />
-            </svg>
+            <x-icons.arrow-right class="text-pocket-teal-600 h-5 w-5" />
           </div>
         </a>
 
-        <!-- Actividad -->
         <a
-          href="{{ route('gas.history') }}?tab=activity"
-          class="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4 transition hover:border-indigo-500 hover:shadow-md"
+          href="{{ route('gas.activity') }}"
+          class="block rounded-lg bg-white p-4 shadow-md transition hover:bg-gray-50"
         >
-          <div class="flex items-center gap-3">
-            <svg
-              class="text-pocket-teal-600 h-8 w-8"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+          <div class="flex items-center justify-between">
             <div>
-              <h4 class="font-bold">📋 Actividad</h4>
+              <h4 class="flex items-center gap-2 font-bold">
+                <x-icons.clock />
+                Actividad
+              </h4>
               <p class="text-pocket-gray-500 text-sm">Todos los movimientos y llamadas</p>
             </div>
+            <x-icons.arrow-right class="text-pocket-teal-600 h-5 w-5" />
           </div>
-          <svg
-            class="text-pocket-teal-600 h-5 w-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M14 5l7 7m0 0l-7 7m7-7H3"
-            />
-          </svg>
         </a>
       </div>
     @endif
