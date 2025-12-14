@@ -12,7 +12,7 @@ ssh root@178.62.255.203 << 'ENDSSH'
     cd /var/www/home-expenses-app
     
     echo "📥 Descargando últimos cambios..."
-    git pull origin main
+    git pull origin development
     
     echo "📦 Instalando dependencias PHP..."
     composer install --no-dev --optimize-autoloader --no-interaction
